@@ -6,6 +6,9 @@ const downloadForm = document.getElementById("downloadForm");
 // Extensiones peligrosas (igual que en el server)
 const blockedExtensions = [".exe", ".bat", ".js", ".sh", ".cmd", ".msi", ".com", ".scr", ".pif"];
 
+// 📏 Límite de 128 MB
+const MAX_FILE_SIZE = 128 * 1024 * 1024;
+
 // 👉 Click en el hoyo abre el selector de archivos
 dropZone.addEventListener("click", () => fileInput.click());
 
@@ -44,7 +47,12 @@ function validateAndUpload(file) {
   const ext = file.name.substring(file.name.lastIndexOf(".")).toLowerCase();
 
   if (blockedExtensions.includes(ext)) {
-    alert("⚠️ Archivo bloqueado por seguridad: " + ext);
+    uploadResult.textContent = `❌ Archivo bloqueado por seguridad: ${ext}`;
+    return;
+  }
+
+  if (file.size > MAX_FILE_SIZE) {
+    uploadResult.textContent = `❌ El archivo excede el límite de ${(MAX_FILE_SIZE / 1024 / 1024)} MB.`;
     return;
   }
 
@@ -61,14 +69,17 @@ async function uploadFile(file) {
   const formData = new FormData();
   formData.append("file", file);
 
-  const res = await fetch("/upload", { method: "POST", body: formData });
-  const data = await res.json();
+  try {
+    const res = await fetch("/upload", { method: "POST", body: formData });
+    const data = await res.json();
 
-  if (data.error) {
-    uploadResult.textContent = "❌ " + data.error;
-  } else {
-    uploadResult.textContent =
-      "✅ Tu código es: " + data.code + " (válido por 5 minutos)";
+    if (data.error) {
+      uploadResult.textContent = "❌ " + data.error;
+    } else {
+      uploadResult.textContent = "✅ Tu código es: " + data.code + " (válido por 5 minutos)";
+    }
+  } catch (err) {
+    uploadResult.textContent = "❌ Error al subir el archivo. Intenta de nuevo.";
   }
 }
 
