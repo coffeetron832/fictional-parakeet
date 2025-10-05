@@ -8,14 +8,14 @@
 <body>
   <h1>📂 Enviar archivos por código</h1>
 
-  <section>
-    <h2>Subir archivo</h2>
-    <form id="uploadForm">
-      <input type="file" name="file" required>
-      <button type="submit">Subir</button>
-    </form>
-    <p id="uploadResult"></p>
+  <!-- Área del hoyo -->
+  <section class="drop-zone" id="dropZone">
+    <p>Arrastra tu archivo aquí</p>
+    <p class="hint">(o haz click para seleccionar)</p>
+    <input type="file" id="fileInput" hidden>
   </section>
+
+  <p id="uploadResult"></p>
 
   <section>
     <h2>Descargar archivo</h2>
