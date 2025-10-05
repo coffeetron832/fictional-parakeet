@@ -162,3 +162,40 @@ button:hover {
     transform: translateX(-50%) scale(0.2);
   }
 }
+
+/* Footer en la parte inferior */
+.bottom-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Espaciado entre izquierda y derecha */
+  align-items: center;
+  background: #222;
+  color: #fff;
+  padding: 10px 20px;
+  box-shadow: 0 -2px 6px rgba(0,0,0,0.3);
+  font-size: 14px;
+}
+
+/* Para que el formulario de descarga se vea más compacto */
+.download-section {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.download-section h2 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.download-section form {
+  display: flex;
+  gap: 8px;
+}
+
+.download-section input {
+  padding: 5px;
+}
