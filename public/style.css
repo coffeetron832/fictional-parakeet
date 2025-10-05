@@ -123,3 +123,42 @@ button:hover {
   color: #777;
 }
 
+/* Animación de archivo cayendo en el pozo */
+.falling-file {
+  position: absolute;
+  top: -40px; /* empieza arriba del pozo */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background: #0af;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  animation: fallIntoHole 1s forwards ease-in;
+  z-index: 3;
+}
+
+/* efecto de caída hacia el fondo */
+@keyframes fallIntoHole {
+  0% {
+    top: -40px;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  60% {
+    top: 40%;
+    opacity: 0.9;
+    transform: translateX(-50%) scale(0.7);
+  }
+  100% {
+    top: 60%;
+    opacity: 0;
+    transform: translateX(-50%) scale(0.2);
+  }
+}
