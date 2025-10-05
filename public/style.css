@@ -163,7 +163,9 @@ button:hover {
   }
 }
 
-/* Footer sutil y compacto */
+
+
+/* Footer ultra compacto */
 .bottom-bar {
   position: fixed;
   bottom: 0;
@@ -172,40 +174,40 @@ button:hover {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(34, 34, 34, 0.8); /* semitransparente */
+  background: rgba(34, 34, 34, 0.85);
   color: #eee;
-  padding: 6px 12px;
-  font-size: 12px;
-  backdrop-filter: blur(4px); /* efecto cristal suave */
-  box-shadow: 0 -1px 4px rgba(0,0,0,0.2);
+  padding: 3px 8px; /* 🔹 Menos alto */
+  font-size: 11px;
+  backdrop-filter: blur(3px);
+  box-shadow: 0 -1px 3px rgba(0,0,0,0.2);
 }
 
-/* Sección de descarga sin título */
+/* Sección de descarga */
 .download-section {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
 .download-section form {
   display: flex;
-  gap: 6px;
+  gap: 4px;
 }
 
 .download-section input {
-  padding: 4px 6px;
-  font-size: 12px;
+  padding: 2px 4px; /* 🔹 Más compacto */
+  font-size: 11px;
   border: 1px solid #444;
-  border-radius: 3px;
+  border-radius: 2px;
   background: #111;
   color: #eee;
 }
 
 .download-section button {
-  padding: 4px 8px;
-  font-size: 12px;
+  padding: 2px 6px; /* 🔹 Más compacto */
+  font-size: 11px;
   border: none;
-  border-radius: 3px;
+  border-radius: 2px;
   background: #444;
   color: #eee;
   cursor: pointer;
