@@ -5,12 +5,20 @@ import crypto from "crypto";
 import path from "path";
 
 const app = express();
-const upload = multer({ dest: "uploads/" });
+
+// 📌 Configuración de multer con límite de 128 MB
+const upload = multer({
+  dest: "uploads/",
+  limits: { fileSize: 128 * 1024 * 1024 } // 128 MB
+});
 
 let filesMap = {}; // { code: { filename, path, expiresAt } }
 
-// Extensiones peligrosas (blacklist)
-const blockedExtensions = [".exe", ".bat", ".js", ".sh", ".cmd", ".msi", ".com", ".scr", ".pif"];
+// 🚫 Extensiones peligrosas (blacklist)
+const blockedExtensions = [
+  ".exe", ".bat", ".js", ".sh", ".cmd",
+  ".msi", ".com", ".scr", ".pif"
+];
 
 // Middleware para servir el frontend
 app.use(express.static("public"));
@@ -25,8 +33,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
 
   // 🚫 Validar extensión
   if (blockedExtensions.includes(originalExt)) {
-    // borrar el archivo temporal que multer ya creó
-    fs.unlink(req.file.path, () => {});
+    fs.unlink(req.file.path, () => {}); // borrar archivo rechazado
     return res.status(400).json({ error: "Archivo no permitido por seguridad." });
   }
 
@@ -47,7 +54,9 @@ app.post("/upload", upload.single("file"), (req, res) => {
 // Descargar archivo
 app.get("/download/:code", (req, res) => {
   const fileData = filesMap[req.params.code];
-  if (!fileData) return res.status(404).send("Código inválido o archivo eliminado.");
+  if (!fileData) {
+    return res.status(404).send("Código inválido o archivo eliminado.");
+  }
 
   res.download(fileData.path, fileData.filename);
 });
@@ -63,4 +72,6 @@ setInterval(() => {
   }
 }, 60 * 1000);
 
-app.listen(8080, () => console.log("🚀 Servidor en http://localhost:8080"));
+app.listen(8080, () =>
+  console.log("🚀 Servidor en http://localhost:8080 (límite 128MB, extensiones peligrosas bloqueadas)")
+);
