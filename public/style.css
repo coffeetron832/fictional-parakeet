@@ -163,39 +163,54 @@ button:hover {
   }
 }
 
-/* Footer en la parte inferior */
+/* Footer sutil y compacto */
 .bottom-bar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between; /* Espaciado entre izquierda y derecha */
+  justify-content: space-between;
   align-items: center;
-  background: #222;
-  color: #fff;
-  padding: 10px 20px;
-  box-shadow: 0 -2px 6px rgba(0,0,0,0.3);
-  font-size: 14px;
+  background: rgba(34, 34, 34, 0.8); /* semitransparente */
+  color: #eee;
+  padding: 6px 12px;
+  font-size: 12px;
+  backdrop-filter: blur(4px); /* efecto cristal suave */
+  box-shadow: 0 -1px 4px rgba(0,0,0,0.2);
 }
 
-/* Para que el formulario de descarga se vea más compacto */
+/* Sección de descarga sin título */
 .download-section {
   display: flex;
   align-items: center;
-  gap: 10px;
-}
-
-.download-section h2 {
-  margin: 0;
-  font-size: 14px;
+  gap: 6px;
 }
 
 .download-section form {
   display: flex;
-  gap: 8px;
+  gap: 6px;
 }
 
 .download-section input {
-  padding: 5px;
+  padding: 4px 6px;
+  font-size: 12px;
+  border: 1px solid #444;
+  border-radius: 3px;
+  background: #111;
+  color: #eee;
+}
+
+.download-section button {
+  padding: 4px 8px;
+  font-size: 12px;
+  border: none;
+  border-radius: 3px;
+  background: #444;
+  color: #eee;
+  cursor: pointer;
+}
+
+.download-section button:hover {
+  background: #555;
 }
