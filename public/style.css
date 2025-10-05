@@ -110,3 +110,16 @@ button:hover {
     0 15px 40px rgba(0,120,255,0.4);
   color: #0af;
 }
+
+.sub-hint {
+  margin-top: -10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #aaa;
+}
+
+.sub-hint span {
+  font-size: 12px;
+  color: #777;
+}
+
