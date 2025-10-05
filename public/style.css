@@ -44,26 +44,34 @@ button:hover {
 }
 
 
-/* Zona del hoyo con aro metálico */
+/* Zona del hoyo (sin aro metálico inicial) */
 .drop-zone {
   margin: 50px auto;
   width: 300px;
-  height: 100px; /* más achatado → efecto elipse */
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, #000 65%, #111 100%);
-  position: relative;
-  overflow: hidden;
+  height: 120px;
+  border-radius: 50% / 40%;
+  background: radial-gradient(ellipse at center, #222 0%, #000 70%);
+  box-shadow: 
+    inset 0 20px 40px rgba(0,0,0,0.9),
+    inset 0 -10px 20px rgba(0,0,0,0.7),
+    0 8px 25px rgba(0,0,0,0.8);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #888;
   text-align: center;
   cursor: pointer;
+  position: relative;
   transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
-/* Aro metálico alrededor del hoyo */
-.drop-zone::before {
+.drop-zone p {
+  margin: 5px;
+  font-size: 14px;
+}
+
+/* Aro blanco sutil SOLO al pasar el mouse */
+.drop-zone:hover::before {
   content: "";
   position: absolute;
   top: 0;
@@ -72,19 +80,10 @@ button:hover {
   height: 100%;
   border-radius: 50%;
   background: radial-gradient(ellipse at center,
-    rgba(200,200,200,0.9) 0%,
-    rgba(150,150,150,0.5) 40%,
-    rgba(50,50,50,0.2) 70%,
-    rgba(0,0,0,0) 100%);
-  box-shadow: inset 0 8px 12px rgba(0,0,0,0.6);
+    rgba(255,255,255,0.4) 0%,
+    rgba(200,200,200,0.2) 30%,
+    rgba(0,0,0,0) 70%);
   pointer-events: none;
-}
-
-.drop-zone p {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  font-size: 14px;
 }
 
 .drop-zone:hover {
@@ -93,7 +92,10 @@ button:hover {
 }
 
 .drop-zone.dragover {
-  background: radial-gradient(ellipse at center, #111 40%, #000 100%);
-  box-shadow: inset 0 0 30px rgba(0,120,255,0.7);
+  background: radial-gradient(ellipse at center, #111 0%, #000 70%);
+  box-shadow: 
+    inset 0 30px 60px rgba(0, 120, 255, 0.9),
+    inset 0 -20px 30px rgba(0,120,255,0.7),
+    0 15px 40px rgba(0,120,255,0.8);
   color: #0af;
 }
