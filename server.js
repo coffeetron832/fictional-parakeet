@@ -2,22 +2,41 @@ import express from "express";
 import multer from "multer";
 import fs from "fs";
 import crypto from "crypto";
+import path from "path";
 
 const app = express();
 const upload = multer({ dest: "uploads/" });
 
 let filesMap = {}; // { code: { filename, path, expiresAt } }
 
+// Extensiones peligrosas (blacklist)
+const blockedExtensions = [".exe", ".bat", ".js", ".sh", ".cmd", ".msi", ".com", ".scr", ".pif"];
+
 // Middleware para servir el frontend
 app.use(express.static("public"));
 
 // Subir archivo
 app.post("/upload", upload.single("file"), (req, res) => {
-  const code = crypto.randomBytes(3).toString("hex"); // código de 6 caracteres
+  if (!req.file) {
+    return res.status(400).json({ error: "No se envió ningún archivo." });
+  }
+
+  const originalExt = path.extname(req.file.originalname).toLowerCase();
+
+  // 🚫 Validar extensión
+  if (blockedExtensions.includes(originalExt)) {
+    // borrar el archivo temporal que multer ya creó
+    fs.unlink(req.file.path, () => {});
+    return res.status(400).json({ error: "Archivo no permitido por seguridad." });
+  }
+
+  // ⚡ Código único
+  const code = crypto.randomBytes(3).toString("hex");
   const expiresAt = Date.now() + 5 * 60 * 1000; // 5 minutos
 
+  // Guardar metadata del archivo
   filesMap[code] = {
-    filename: req.file.originalname,
+    filename: path.basename(req.file.originalname), // sanitizamos el nombre
     path: req.file.path,
     expiresAt
   };
