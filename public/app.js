@@ -25,7 +25,7 @@ dropZone.addEventListener("drop", (e) => {
   const file = e.dataTransfer.files[0];
   if (file) {
     uploadFile(file);
-    animateAbsorb();
+    animateFileDrop();
   }
 });
 
@@ -34,7 +34,7 @@ fileInput.addEventListener("change", () => {
   const file = fileInput.files[0];
   if (file) {
     uploadFile(file);
-    animateAbsorb();
+    animateFileDrop();
   }
 });
 
@@ -46,15 +46,20 @@ async function uploadFile(file) {
   const res = await fetch("/upload", { method: "POST", body: formData });
   const data = await res.json();
 
-  uploadResult.textContent = "Tu código es: " + data.code + " (válido por 5 minutos)";
+  uploadResult.textContent =
+    "Tu código es: " + data.code + " (válido por 5 minutos)";
 }
 
-// Función animación de absorción
-function animateAbsorb() {
-  dropZone.style.transform = "scale(0.9)";
-  setTimeout(() => {
-    dropZone.style.transform = "scale(1)";
-  }, 200);
+// 🔽 Función animación del archivo cayendo en el pozo
+function animateFileDrop() {
+  const fileIcon = document.createElement("div");
+  fileIcon.className = "falling-file";
+  fileIcon.textContent = "📄";
+  dropZone.appendChild(fileIcon);
+
+  fileIcon.addEventListener("animationend", () => {
+    fileIcon.remove();
+  });
 }
 
 // 👉 Formulario de descarga (ya estaba)
