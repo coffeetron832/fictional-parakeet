@@ -3,6 +3,14 @@ const fileInput = document.getElementById("fileInput");
 const uploadResult = document.getElementById("uploadResult");
 const downloadForm = document.getElementById("downloadForm");
 
+// 📌 Info del archivo para verificación previa
+const fileInfoBox = document.getElementById("fileInfo");
+const infoName = document.getElementById("infoName");
+const infoSize = document.getElementById("infoSize");
+const infoType = document.getElementById("infoType");
+const infoExpire = document.getElementById("infoExpire");
+const confirmDownloadBtn = document.getElementById("confirmDownload");
+
 // Extensiones peligrosas (igual que en el server)
 const blockedExtensions = [".exe", ".bat", ".js", ".sh", ".cmd", ".msi", ".com", ".scr", ".pif"];
 
@@ -95,14 +103,45 @@ function animateFileDrop() {
   });
 }
 
-// 👉 Confirmación antes de descargar
-downloadForm.addEventListener("submit", (e) => {
+// 👉 Verificar archivo antes de descargar
+downloadForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const code = document.getElementById("code").value.trim();
 
   if (!code) return;
 
-  if (confirm(`¿Seguro que quieres descargar el archivo con código: ${code}?`)) {
+  try {
+    const res = await fetch(`/file/${code}`);
+    const data = await res.json();
+
+    if (data.error) {
+      alert("❌ " + data.error);
+      fileInfoBox.style.display = "none";
+      return;
+    }
+
+    // Mostrar info en el panel
+    infoName.textContent = data.filename;
+    infoSize.textContent = (data.size / 1024).toFixed(1) + " KB";
+    infoType.textContent = data.type || "Desconocido";
+    infoExpire.textContent = Math.max(0, Math.floor((data.expiresAt - Date.now()) / 1000));
+
+    fileInfoBox.style.display = "block";
+
+    // Guardamos el código actual en el botón confirmar
+    confirmDownloadBtn.dataset.code = code;
+
+  } catch (err) {
+    alert("❌ Error al verificar el archivo.");
+  }
+});
+
+// 👉 Confirmar descarga después de verificar
+confirmDownloadBtn.addEventListener("click", () => {
+  const code = confirmDownloadBtn.dataset.code;
+  if (!code) return;
+
+  if (confirm(`¿Deseas descargar el archivo con código: ${code}?`)) {
     window.location.href = "/download/" + code;
   }
 });
