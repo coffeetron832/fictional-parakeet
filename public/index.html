@@ -19,9 +19,18 @@
   <section>
     <h2>Descargar archivo</h2>
     <form id="downloadForm">
-      <input type="text" id="code" placeholder="Introduce el código">
-      <button type="submit">Descargar</button>
+      <input type="text" id="code" placeholder="Introduce el código" required>
+      <button type="submit">Verificar</button>
     </form>
+
+    <!-- Aquí se mostrarán los detalles del archivo -->
+    <div id="fileInfo" style="display:none; margin-top:10px; padding:8px; border:1px solid #ccc; border-radius:6px;">
+      <p><strong>Archivo:</strong> <span id="infoName"></span></p>
+      <p><strong>Tamaño:</strong> <span id="infoSize"></span></p>
+      <p><strong>Tipo:</strong> <span id="infoType"></span></p>
+      <p><strong>Expira en:</strong> <span id="infoExpire"></span> segundos</p>
+      <button id="confirmDownload">⬇️ Confirmar descarga</button>
+    </div>
   </section>
 
   <script src="app.js"></script>
