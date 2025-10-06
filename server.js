@@ -79,7 +79,7 @@ app.get("/file/:code", (req, res) => {
   });
 });
 
-// 📥 Descargar archivo
+// 📥 Descargar archivo con branding "paraleel"
 app.get("/download/:code", (req, res) => {
   const fileData = filesMap[req.params.code];
   if (!fileData) {
@@ -93,7 +93,12 @@ app.get("/download/:code", (req, res) => {
     return res.status(410).send("El archivo ha expirado.");
   }
 
-  res.download(fileData.path, fileData.filename);
+  // Agregar sufijo al nombre del archivo antes de enviarlo
+  const ext = path.extname(fileData.filename);
+  const base = path.basename(fileData.filename, ext);
+  const brandedName = `${base}_paraleel${ext}`;
+
+  res.download(fileData.path, brandedName);
 });
 
 // 🧹 Limpieza automática cada minuto
@@ -108,5 +113,5 @@ setInterval(() => {
 }, 60 * 1000);
 
 app.listen(8080, () =>
-  console.log("🚀 Servidor en http://localhost:8080 (límite 128MB, extensiones bloqueadas)")
+  console.log("🚀 Servidor en http://localhost:8080 (límite 128MB, extensiones bloqueadas, branding paraleel)")
 );
