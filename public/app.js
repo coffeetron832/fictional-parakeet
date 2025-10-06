@@ -123,10 +123,26 @@ downloadForm.addEventListener("submit", async (e) => {
     // Mostrar info en el panel
     infoName.textContent = data.filename;
     infoSize.textContent = (data.size / 1024).toFixed(1) + " KB";
-    infoType.textContent = data.type || "Desconocido";
-    infoExpire.textContent = Math.max(0, Math.floor((data.expiresAt - Date.now()) / 1000));
+    infoType.textContent = data.mimetype || "Desconocido";
+
+    // Expiración (segundos restantes) viene como data.expiresIn
+    let remaining = data.expiresIn;
+    infoExpire.textContent = remaining + " segundos";
+
+    // Iniciar contador regresivo
+    const interval = setInterval(() => {
+      remaining--;
+      if (remaining <= 0) {
+        clearInterval(interval);
+        infoExpire.textContent = "Expirado";
+        confirmDownloadBtn.disabled = true;
+      } else {
+        infoExpire.textContent = remaining + " segundos";
+      }
+    }, 1000);
 
     fileInfoBox.style.display = "block";
+    confirmDownloadBtn.disabled = false;
 
     // Guardamos el código actual en el botón confirmar
     confirmDownloadBtn.dataset.code = code;
