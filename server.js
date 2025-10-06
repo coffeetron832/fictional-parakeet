@@ -13,7 +13,9 @@ const upload = multer({
   limits: { fileSize: 128 * 1024 * 1024 } // 128 MB
 });
 
-let filesMap = {}; // { code: { filename, path, expiresAt, size, mimetype } }
+// Mapa de archivos activos
+let filesMap = {}; 
+// Estructura: { code: { filename, path, expiresAt, size, mimetype } }
 
 // 🚫 Extensiones peligrosas (blacklist)
 const blockedExtensions = [
@@ -21,7 +23,7 @@ const blockedExtensions = [
   ".msi", ".com", ".scr", ".pif"
 ];
 
-// Middleware para servir el frontend
+// Middleware para servir frontend
 app.use(express.static("public"));
 
 // 📤 Subir archivo
@@ -44,7 +46,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
 
   // Guardar metadata del archivo
   filesMap[code] = {
-    filename: path.basename(req.file.originalname),
+    filename: req.file.originalname, // mantener nombre original
     path: req.file.path,
     expiresAt,
     size: req.file.size,
@@ -61,13 +63,19 @@ app.get("/file/:code", (req, res) => {
     return res.status(404).json({ error: "Código inválido o archivo no encontrado." });
   }
 
-  const remainingTime = Math.max(0, fileData.expiresAt - Date.now());
+  const remainingTime = fileData.expiresAt - Date.now();
+  if (remainingTime <= 0) {
+    // si ya expiró, eliminarlo y avisar
+    fs.unlink(fileData.path, () => {});
+    delete filesMap[req.params.code];
+    return res.status(410).json({ error: "El archivo ha expirado." });
+  }
 
   res.json({
     filename: fileData.filename,
     size: fileData.size,
     mimetype: fileData.mimetype,
-    expiresIn: Math.floor(remainingTime / 1000) // segundos restantes
+    expiresIn: Math.floor(remainingTime / 1000) // en segundos
   });
 });
 
@@ -76,6 +84,13 @@ app.get("/download/:code", (req, res) => {
   const fileData = filesMap[req.params.code];
   if (!fileData) {
     return res.status(404).send("Código inválido o archivo eliminado.");
+  }
+
+  const remainingTime = fileData.expiresAt - Date.now();
+  if (remainingTime <= 0) {
+    fs.unlink(fileData.path, () => {});
+    delete filesMap[req.params.code];
+    return res.status(410).send("El archivo ha expirado.");
   }
 
   res.download(fileData.path, fileData.filename);
