@@ -2,11 +2,11 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Parallell</title>
+  <title>Paraleel</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>📂 Parallell</h1>
+  <h1>📂 Paraleel</h1>
   <p class="sub-hint">Arrastra tu archivo aquí <br><span>(o haz click para seleccionar)</span></p>
 
   <!-- Área del pozo -->
@@ -19,7 +19,14 @@
   <section>
     <h2>Descargar archivo</h2>
     <form id="downloadForm">
-      <input type="text" id="code" placeholder="Introduce el código" required>
+      <div class="code-inputs">
+        <input type="text" maxlength="1" class="code-digit" />
+        <input type="text" maxlength="1" class="code-digit" />
+        <input type="text" maxlength="1" class="code-digit" />
+        <input type="text" maxlength="1" class="code-digit" />
+        <input type="text" maxlength="1" class="code-digit" />
+        <input type="text" maxlength="1" class="code-digit" />
+      </div>
       <button type="submit">Verificar</button>
     </form>
 
