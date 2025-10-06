@@ -11,6 +11,9 @@ const infoType = document.getElementById("infoType");
 const infoExpire = document.getElementById("infoExpire");
 const confirmDownloadBtn = document.getElementById("confirmDownload");
 
+// 📌 Inputs del código (tipo OTP)
+const codeInputs = document.querySelectorAll(".code-digit");
+
 // Extensiones peligrosas (igual que en el server)
 const blockedExtensions = [".exe", ".bat", ".js", ".sh", ".cmd", ".msi", ".com", ".scr", ".pif"];
 
@@ -84,7 +87,7 @@ async function uploadFile(file) {
     if (data.error) {
       uploadResult.textContent = "❌ " + data.error;
     } else {
-      uploadResult.textContent = "✅ Tu código es: " + data.code + " (válido por 5 minutos)";
+      uploadResult.textContent = "✅ Tu código es: " + data.code.toUpperCase() + " (válido por 5 minutos)";
     }
   } catch (err) {
     uploadResult.textContent = "❌ Error al subir el archivo. Intenta de nuevo.";
@@ -103,12 +106,32 @@ function animateFileDrop() {
   });
 }
 
+// 📌 Manejo de inputs OTP (avanzar y retroceder)
+codeInputs.forEach((input, idx) => {
+  input.addEventListener("input", () => {
+    if (input.value.length === 1 && idx < codeInputs.length - 1) {
+      codeInputs[idx + 1].focus();
+    }
+  });
+
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Backspace" && !input.value && idx > 0) {
+      codeInputs[idx - 1].focus();
+    }
+  });
+});
+
 // 👉 Verificar archivo antes de descargar
 downloadForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const code = document.getElementById("code").value.trim();
 
-  if (!code) return;
+  // Construir el código completo
+  const code = Array.from(codeInputs).map(i => i.value.trim()).join("");
+
+  if (code.length !== codeInputs.length) {
+    alert("❌ Ingresa el código completo.");
+    return;
+  }
 
   try {
     const res = await fetch(`/file/${code}`);
