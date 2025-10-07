@@ -8,16 +8,18 @@
 <body>
 
 <div id="welcomeModal" class="modal">
-    <div class="modal-content">
-      <h2>👋 Bienvenido a Paraleel</h2>
-      <p>
-        Aquí puedes subir archivos de hasta <strong>128 MB</strong> y compartirlos 
-        mediante un código efímero válido por <strong>5 minutos</strong>.<br><br>
-        Simple, seguro y sin registros.
-      </p>
-      <button id="closeModal">Entendido</button>
-    </div>
+  <div class="modal-content">
+    <h2>👋 Bienvenido a Paraleel</h2>
+    <p class="intro">Has llegado al <strong>Pozo de Paraleel</strong>.</p>
+    <ul class="steps">
+      <li><i data-lucide="upload-cloud"></i> Sube tu archivo (máx. <strong>128 MB</strong>) arrastrándolo al pozo.</li>
+      <li><i data-lucide="key-round"></i> Obtendrás un <strong>código único</strong> que puedes compartir.</li>
+      <li><i data-lucide="clock"></i> El archivo vive <strong>5 minutos</strong>, luego se elimina automáticamente.</li>
+    </ul>
+    <p class="summary">Una forma sencilla y segura de enviar archivos sin registros.</p>
+    <button id="closeModal">Entendido</button>
   </div>
+</div>
   
   <h1>📂 Paraleel</h1>
   <p class="sub-hint">Arrastra tu archivo aquí <br><span>(o haz click para seleccionar)</span></p>
@@ -54,5 +56,6 @@
   </section>
 
   <script src="app.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </body>
 </html>
