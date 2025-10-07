@@ -184,3 +184,19 @@ confirmDownloadBtn.addEventListener("click", () => {
     window.location.href = "/download/" + code;
   }
 });
+
+
+
+
+// 🌌 Modal de bienvenida
+window.addEventListener("load", () => {
+  const modal = document.getElementById("welcomeModal");
+  const closeBtn = document.getElementById("closeModal");
+
+  // Mostrar modal con un pequeño retardo
+  setTimeout(() => modal.classList.add("show"), 300);
+
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("show");
+  });
+});
