@@ -136,7 +136,7 @@ function formatTimeLong(seconds) {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     if (secs === 0) return `Expira en: ${mins} minuto${mins !== 1 ? "s" : ""}`;
-    return `Expira en: ${mins} min ${secs}s`;
+    return `${mins} min ${secs}s`;
   }
 }
 
