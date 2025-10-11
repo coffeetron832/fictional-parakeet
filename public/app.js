@@ -17,8 +17,8 @@ const codeInputs = document.querySelectorAll(".code-digit");
 // Extensiones peligrosas (igual que en el server)
 const blockedExtensions = [".exe", ".bat", ".js", ".sh", ".cmd", ".msi", ".com", ".scr", ".pif"];
 
-// 📏 Límite de 128 MB
-const MAX_FILE_SIZE = 128 * 1024 * 1024;
+// 📏 Límite en cliente: 1 GB (coincide con el servidor)
+const MAX_FILE_SIZE = 1 * 1024 * 1024 * 1024; // 1 GB
 
 // 👉 Click en el hoyo abre el selector de archivos
 dropZone.addEventListener("click", () => fileInput.click());
@@ -63,11 +63,11 @@ function validateAndUpload(file) {
   }
 
   if (file.size > MAX_FILE_SIZE) {
-    uploadResult.textContent = `❌ El archivo excede el límite de ${(MAX_FILE_SIZE / 1024 / 1024)} MB.`;
+    uploadResult.textContent = `❌ El archivo excede el límite de ${(MAX_FILE_SIZE / 1024 / 1024 / 1024)} GB.`;
     return;
   }
 
-  if (!confirm(`¿Seguro que quieres subir "${file.name}" (${(file.size / 1024).toFixed(1)} KB)?`)) {
+  if (!confirm(`¿Seguro que quieres subir "${file.name}" (${(file.size / 1024 / 1024).toFixed(2)} MB)?`)) {
     return;
   }
 
@@ -87,7 +87,9 @@ async function uploadFile(file) {
     if (data.error) {
       uploadResult.textContent = "❌ " + data.error;
     } else {
-      uploadResult.textContent = "✅ Tu código es: " + data.code.toUpperCase() + " (válido por 5 minutos)";
+      // Si el servidor devuelve expiresIn lo usamos para mostrar el tiempo real
+      const expiresSecs = data.expiresIn || (5 * 60);
+      uploadResult.textContent = `✅ Tu código es: ${data.code.toUpperCase()} (expira en ${formatTimeShort(expiresSecs)})`;
     }
   } catch (err) {
     uploadResult.textContent = "❌ Error al subir el archivo. Intenta de nuevo.";
@@ -109,6 +111,8 @@ function animateFileDrop() {
 // 📌 Manejo de inputs OTP (avanzar y retroceder)
 codeInputs.forEach((input, idx) => {
   input.addEventListener("input", () => {
+    // permitir solo un carácter (hex preferido)
+    input.value = input.value.slice(0, 1).toLowerCase().replace(/[^0-9a-f]/g, "");
     if (input.value.length === 1 && idx < codeInputs.length - 1) {
       codeInputs[idx + 1].focus();
     }
@@ -121,12 +125,62 @@ codeInputs.forEach((input, idx) => {
   });
 });
 
+// ----------------- Expiración: formateo y control de contador -----------------
+let countdownIntervalId = null;
+
+function formatTimeLong(seconds) {
+  // devuelve una frase como "Expira en: 1 min 30s" o "Expira en: 50 segundos"
+  if (seconds < 60) {
+    return `Expira en: ${seconds} segundo${seconds !== 1 ? "s" : ""}`;
+  } else {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    if (secs === 0) return `Expira en: ${mins} minuto${mins !== 1 ? "s" : ""}`;
+    return `Expira en: ${mins} min ${secs}s`;
+  }
+}
+
+function formatTimeShort(seconds) {
+  // devuelve "1m30s", "50s", "2m"
+  if (seconds < 60) return `${seconds}s`;
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  if (secs === 0) return `${mins}m`;
+  return `${mins}m${secs}s`;
+}
+
+function startCountdown(initialSeconds) {
+  // limpia contador previo
+  if (countdownIntervalId) {
+    clearInterval(countdownIntervalId);
+    countdownIntervalId = null;
+  }
+
+  let remaining = initialSeconds;
+  infoExpire.textContent = formatTimeLong(remaining);
+
+  countdownIntervalId = setInterval(() => {
+    remaining--;
+    if (remaining <= 0) {
+      clearInterval(countdownIntervalId);
+      countdownIntervalId = null;
+      infoExpire.textContent = "Expirado";
+      confirmDownloadBtn.disabled = true;
+      // también ocultar infoBox si quieres:
+      // fileInfoBox.style.display = "none";
+    } else {
+      infoExpire.textContent = formatTimeLong(remaining);
+    }
+  }, 1000);
+}
+// ---------------------------------------------------------------------------
+
 // 👉 Verificar archivo antes de descargar
 downloadForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   // Construir el código completo
-  const code = Array.from(codeInputs).map(i => i.value.trim()).join("");
+  const code = Array.from(codeInputs).map(i => i.value.trim()).join("").toLowerCase();
 
   if (code.length !== codeInputs.length) {
     alert("❌ Ingresa el código completo.");
@@ -149,26 +203,19 @@ downloadForm.addEventListener("submit", async (e) => {
     infoType.textContent = data.mimetype || "Desconocido";
 
     // Expiración (segundos restantes) viene como data.expiresIn
-    let remaining = data.expiresIn;
-    infoExpire.textContent = remaining + " segundos";
-
-    // Iniciar contador regresivo
-    const interval = setInterval(() => {
-      remaining--;
-      if (remaining <= 0) {
-        clearInterval(interval);
-        infoExpire.textContent = "Expirado";
-        confirmDownloadBtn.disabled = true;
-      } else {
-        infoExpire.textContent = remaining + " segundos";
-      }
-    }, 1000);
+    const remaining = Number(data.expiresIn) || 0;
+    if (remaining <= 0) {
+      infoExpire.textContent = "Expirado";
+      confirmDownloadBtn.disabled = true;
+    } else {
+      // mostrar con formato y comenzar contador
+      startCountdown(remaining);
+      confirmDownloadBtn.disabled = false;
+      // Guardamos el código actual en el botón confirmar
+      confirmDownloadBtn.dataset.code = code;
+    }
 
     fileInfoBox.style.display = "block";
-    confirmDownloadBtn.disabled = false;
-
-    // Guardamos el código actual en el botón confirmar
-    confirmDownloadBtn.dataset.code = code;
 
   } catch (err) {
     alert("❌ Error al verificar el archivo.");
@@ -184,9 +231,6 @@ confirmDownloadBtn.addEventListener("click", () => {
     window.location.href = "/download/" + code;
   }
 });
-
-
-
 
 // 🌌 Modal de bienvenida
 window.addEventListener("load", () => {
