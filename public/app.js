@@ -248,20 +248,16 @@ window.addEventListener("load", () => {
 
 const particleLayer = document.querySelector(".particle-layer");
 
-function createParticle() {
+function createSpiralParticle() {
   const particle = document.createElement("div");
   particle.classList.add("particle");
 
-  // Posición inicial horizontal aleatoria
-  particle.style.left = Math.random() * 100 + "%";
-
-  // Duración entre 3 y 6 segundos
+  // Aleatorizar duración y radio inicial
   const duration = 3 + Math.random() * 3;
-  particle.style.animationDuration = duration + "s";
+  const radius = 40 + Math.random() * 30;
 
-  // Drift entre -15px y +15px para movimiento sutil lateral
-  const drift = Math.random() * 30 - 15;
-  particle.style.setProperty("--drift", drift + "px");
+  particle.style.setProperty("--duration", duration + "s");
+  particle.style.setProperty("--radius", radius + "px");
 
   particleLayer.appendChild(particle);
 
@@ -270,5 +266,8 @@ function createParticle() {
   }, duration * 1000);
 }
 
-// Genera partículas cada 250ms (ajustable)
-setInterval(createParticle, 250);
+// Genera una partícula cada 200-300ms con variación
+setInterval(() => {
+  if (Math.random() < 0.8) createSpiralParticle();
+}, 250);
+
