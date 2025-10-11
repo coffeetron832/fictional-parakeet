@@ -308,28 +308,34 @@ button:hover {
   z-index: 1;
 }
 
-/* Partícula */
+/* Partícula digital */
 .particle {
   position: absolute;
   width: 3px;
   height: 3px;
+  background: rgba(0,170,255,0.35);
   border-radius: 50%;
-  background: rgba(0,170,255,0.25); /* tono digital */
   filter: blur(1px);
-  animation: fallParticle linear forwards;
+  opacity: 0;
+  animation: spiralFall var(--duration, 3s) linear forwards;
 }
 
-@keyframes fallParticle {
+@keyframes spiralFall {
   0% {
-    transform: translateY(-10px) translateX(var(--drift, 0px));
+    transform: rotate(0deg) translateX(var(--radius, 50px));
+    top: 0%;
+    left: 50%;
     opacity: 0;
   }
-  40% {
+  30% {
     opacity: 0.4;
   }
   100% {
-    transform: translateY(140px) translateX(var(--drift, 0px));
+    transform: rotate(720deg) translateX(0); /* Se enrolla hacia el centro */
+    top: 60%;
+    left: 50%;
     opacity: 0;
   }
 }
+
 
