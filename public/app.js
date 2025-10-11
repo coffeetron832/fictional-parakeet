@@ -244,3 +244,31 @@ window.addEventListener("load", () => {
     modal.classList.remove("show");
   });
 });
+
+
+const particleLayer = document.querySelector(".particle-layer");
+
+function createParticle() {
+  const particle = document.createElement("div");
+  particle.classList.add("particle");
+
+  // Posición inicial horizontal aleatoria
+  particle.style.left = Math.random() * 100 + "%";
+
+  // Duración entre 3 y 6 segundos
+  const duration = 3 + Math.random() * 3;
+  particle.style.animationDuration = duration + "s";
+
+  // Drift entre -15px y +15px para movimiento sutil lateral
+  const drift = Math.random() * 30 - 15;
+  particle.style.setProperty("--drift", drift + "px");
+
+  particleLayer.appendChild(particle);
+
+  setTimeout(() => {
+    particle.remove();
+  }, duration * 1000);
+}
+
+// Genera partículas cada 250ms (ajustable)
+setInterval(createParticle, 250);
