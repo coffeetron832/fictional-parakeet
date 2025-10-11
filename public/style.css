@@ -261,3 +261,35 @@ button:hover {
     opacity: 1;
   }
 }
+
+
+
+.tooltip-target {
+  text-decoration: underline dotted;
+  position: relative;
+  cursor: help;
+}
+
+.tooltip {
+  position: absolute;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111;
+  color: #eee;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  white-space: nowrap;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  border: 1px solid #222;
+  z-index: 10;
+}
+
+.tooltip-target:hover .tooltip {
+  opacity: 1;
+}
