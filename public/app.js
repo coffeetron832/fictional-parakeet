@@ -131,7 +131,7 @@ let countdownIntervalId = null;
 function formatTimeLong(seconds) {
   // devuelve una frase como "Expira en: 1 min 30s" o "Expira en: 50 segundos"
   if (seconds < 60) {
-    return `Expira en: ${seconds} segundo${seconds !== 1 ? "s" : ""}`;
+    return `${seconds} segundo${seconds !== 1 ? "s" : ""}`;
   } else {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
