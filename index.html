@@ -20,8 +20,9 @@
     }
 
     header {
+      position: relative;
       text-align: center;
-      padding: 80px 20px 40px;
+      padding: 80px 20px 60px;
     }
 
     h1 {
@@ -29,6 +30,18 @@
       font-size: 4rem;
       letter-spacing: 6px;
       color: #fff;
+      position: relative;
+      display: inline-block;
+    }
+
+    /* Imagen del personaje apoyado en la Z */
+    .pose {
+      position: absolute;
+      right: 22%; /* Ajusta según el ancho del texto */
+      bottom: 0;
+      width: 160px;
+      transform: rotate(-4deg);
+      filter: brightness(100%) invert(1);
     }
 
     .intro {
@@ -37,7 +50,7 @@
       text-align: center;
       font-size: 1rem;
       line-height: 1.6;
-      padding: 10px 20px 40px;
+      padding: 20px 20px 40px;
       color: #ccc;
     }
 
@@ -66,7 +79,7 @@
       width: 140px;
       height: auto;
       margin-bottom: 15px;
-      filter: brightness(100%) invert(1); /* imágenes negras → blancas */
+      filter: brightness(100%) invert(1);
     }
 
     .character h2 {
@@ -108,6 +121,13 @@
       h1 {
         font-size: 2.8rem;
       }
+
+      .pose {
+        width: 120px;
+        right: 15%;
+        bottom: -10px;
+      }
+
       .intro {
         font-size: 0.95rem;
       }
@@ -118,6 +138,7 @@
 
   <header>
     <h1>HUMVNZ</h1>
+    <img src="121.jpg" alt="Personaje apoyado en la Z" class="pose">
     <p class="intro">
       HUMVNZ representa al humano urbano. Cuatro figuras. Cuatro historias.  
       El movimiento, la caída y el impulso de seguir.
