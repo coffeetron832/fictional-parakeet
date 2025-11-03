@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HUMVNZ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Momo+Trust+Display&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #fff;
+      color: #000;
+      font-family: 'Open Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      padding: 80px 20px 40px;
+    }
+
+    h1 {
+      font-family: 'Momo Trust Display', sans-serif;
+      font-size: 4rem;
+      letter-spacing: 6px;
+    }
+
+    .intro {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 1rem;
+      line-height: 1.6;
+      padding: 10px 20px 40px;
+    }
+
+    .characters {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+
+    .character {
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .character.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .character img {
+      width: 140px;
+      height: auto;
+      margin-bottom: 15px;
+      filter: brightness(0);
+    }
+
+    .character h2 {
+      font-family: 'Momo Trust Display', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .character p {
+      font-size: 0.95rem;
+      max-width: 280px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .insta-btn {
+      display: inline-block;
+      text-decoration: none;
+      color: #fff;
+      background-color: #000;
+      padding: 14px 28px;
+      border-radius: 30px;
+      transition: 0.3s ease;
+      font-weight: 600;
+    }
+
+    .insta-btn:hover {
+      background-color: #222;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 2.8rem;
+      }
+      .intro {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>HUMVNZ</h1>
+    <p class="intro">
+      HUMVNZ representa al humano urbano. Cuatro figuras. Cuatro historias.  
+      El movimiento, la caída y el impulso de seguir.
+    </p>
+  </header>
+
+  <section class="characters">
+    <div class="character">
+      <img src="personaje1.png" alt="Personaje 1">
+      <h2>Personaje 1</h2>
+      <p>Texto breve sobre su esencia o personalidad.</p>
+    </div>
+    <div class="character">
+      <img src="personaje2.png" alt="Personaje 2">
+      <h2>Personaje 2</h2>
+      <p>Texto breve sobre su esencia o personalidad.</p>
+    </div>
+    <div class="character">
+      <img src="personaje3.png" alt="Personaje 3">
+      <h2>Personaje 3</h2>
+      <p>Texto breve sobre su esencia o personalidad.</p>
+    </div>
+    <div class="character">
+      <img src="personaje4.png" alt="Personaje 4">
+      <h2>Personaje 4</h2>
+      <p>Texto breve sobre su esencia o personalidad.</p>
+    </div>
+  </section>
+
+  <footer>
+    <a href="https://www.instagram.com/tu_perfil" target="_blank" class="insta-btn">Instagram</a>
+  </footer>
+
+  <script>
+    // Efecto de aparición al hacer scroll
+    const chars = document.querySelectorAll('.character');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+
+    chars.forEach(char => observer.observe(char));
+  </script>
+
+</body>
+</html>
