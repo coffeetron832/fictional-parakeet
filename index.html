@@ -13,8 +13,8 @@
     }
 
     body {
-      background-color: #fff;
-      color: #000;
+      background-color: #000;
+      color: #fff;
       font-family: 'Open Sans', sans-serif;
       overflow-x: hidden;
     }
@@ -28,6 +28,7 @@
       font-family: 'Momo Trust Display', sans-serif;
       font-size: 4rem;
       letter-spacing: 6px;
+      color: #fff;
     }
 
     .intro {
@@ -37,6 +38,7 @@
       font-size: 1rem;
       line-height: 1.6;
       padding: 10px 20px 40px;
+      color: #ccc;
     }
 
     .characters {
@@ -64,13 +66,14 @@
       width: 140px;
       height: auto;
       margin-bottom: 15px;
-      filter: brightness(0);
+      filter: brightness(100%) invert(1); /* imágenes negras → blancas */
     }
 
     .character h2 {
       font-family: 'Momo Trust Display', sans-serif;
       font-size: 1.5rem;
       margin-bottom: 10px;
+      color: #fff;
     }
 
     .character p {
@@ -78,6 +81,7 @@
       max-width: 280px;
       margin: 0 auto;
       line-height: 1.5;
+      color: #ccc;
     }
 
     footer {
@@ -88,8 +92,8 @@
     .insta-btn {
       display: inline-block;
       text-decoration: none;
-      color: #fff;
-      background-color: #000;
+      color: #000;
+      background-color: #fff;
       padding: 14px 28px;
       border-radius: 30px;
       transition: 0.3s ease;
@@ -97,7 +101,7 @@
     }
 
     .insta-btn:hover {
-      background-color: #222;
+      background-color: #ccc;
     }
 
     @media (max-width: 600px) {
