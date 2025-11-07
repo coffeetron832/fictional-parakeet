@@ -24,7 +24,6 @@
       padding: 80px 20px 60px;
     }
 
-    /* Contenedor que agrupa HUMVNZ + personaje */
     .logo-container {
       position: relative;
       display: inline-block;
@@ -39,11 +38,10 @@
       z-index: 1;
     }
 
-    /* Imagen apoyada en la Z */
     .pose {
       position: absolute;
-      bottom: -1px;     /* un poco más abajo de la base del texto */
-      right: -72px;      /* justo al lado de la Z */
+      bottom: -1px;
+      right: -72px;
       width: 120px;
       transform: rotate(-6deg);
       z-index: 2;
@@ -73,6 +71,7 @@
       opacity: 0;
       transform: translateY(30px);
       transition: all 0.8s ease;
+      cursor: pointer;
     }
 
     .character.visible {
@@ -91,7 +90,6 @@
       font-family: 'Momo Trust Display', sans-serif;
       font-size: 1.5rem;
       margin-bottom: 10px;
-      color: #fff;
     }
 
     .character p {
@@ -102,41 +100,63 @@
       color: #ccc;
     }
 
-    footer {
+    /* MODAL */
+    .modal-bg {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      backdrop-filter: blur(4px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal {
+      background: #111;
+      border: 1px solid #333;
+      width: 90%;
+      max-width: 400px;
+      padding: 25px;
+      border-radius: 10px;
+      text-align: left;
+      animation: fadeIn 0.25s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal h3 {
+      font-family: 'Momo Trust Display', sans-serif;
+      font-size: 1.8rem;
+      margin-bottom: 10px;
+    }
+
+    .modal p {
+      color: #ccc;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .close-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
       text-align: center;
-      padding: 60px 20px;
-    }
-
-    .insta-btn {
-      display: inline-block;
-      text-decoration: none;
+      border: none;
+      background: #fff;
       color: #000;
-      background-color: #fff;
-      padding: 14px 28px;
-      border-radius: 30px;
-      transition: 0.3s ease;
+      border-radius: 8px;
       font-weight: 600;
+      cursor: pointer;
     }
 
-    .insta-btn:hover {
-      background-color: #ccc;
+    .close-btn:hover {
+      background: #ddd;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2.8rem;
-      }
-
-      .pose {
-        width: 120px;
-        right: -20px;
-        bottom: -5px;
-      }
-
-      .intro {
-        font-size: 0.95rem;
-      }
-    }
   </style>
 </head>
 <body>
@@ -153,21 +173,27 @@
   </header>
 
   <section class="characters">
-    <div class="character">
-      <img src="personaje1.png" alt="Personaje 1">
-      <h2>Personaje 1</h2>
-      <p>Texto breve sobre su esencia o personalidad.</p>
+
+    <!-- ✅ JAVIER -->
+    <div class="character" id="javier-card">
+      <img src="personaje1.png" alt="Javier">
+      <h2>Javier</h2>
+      <p>Relajado, impredecible, rápido para meterse y salir de problemas.</p>
     </div>
+
+    <!-- Más personajes aquí -->
     <div class="character">
       <img src="personaje2.png" alt="Personaje 2">
       <h2>Personaje 2</h2>
       <p>Texto breve sobre su esencia o personalidad.</p>
     </div>
+
     <div class="character">
       <img src="personaje3.png" alt="Personaje 3">
       <h2>Personaje 3</h2>
       <p>Texto breve sobre su esencia o personalidad.</p>
     </div>
+
     <div class="character">
       <img src="personaje4.png" alt="Personaje 4">
       <h2>Personaje 4</h2>
@@ -175,21 +201,46 @@
     </div>
   </section>
 
-  <footer>
-    
-  </footer>
+
+  <!-- ✅ MODAL DE JAVIER -->
+  <div class="modal-bg" id="modal-javier">
+    <div class="modal">
+      <h3>Javier</h3>
+      <p><strong>Color favorito:</strong> Azul</p>
+      <p><strong>Personalidad:</strong> Relajado, impredecible, rápido para meterse y salir de problemas.</p>
+      <p><strong>Historia:</strong> Es el tipo que siempre tiene todo bajo control… o al menos eso parece. Siempre carga un cigarrillo, aunque no siempre lo prende. Lo usa para pensar.</p>
+
+      <button class="close-btn" id="close-javier">Cerrar</button>
+    </div>
+  </div>
+
 
   <script>
+    /* Animación */
     const chars = document.querySelectorAll('.character');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.2 });
-
     chars.forEach(char => observer.observe(char));
+
+    /* MODAL JAVIER */
+    const javierCard = document.getElementById('javier-card');
+    const javierModal = document.getElementById('modal-javier');
+    const closeJavier = document.getElementById('close-javier');
+
+    javierCard.addEventListener('click', () => {
+      javierModal.style.display = "flex";
+    });
+
+    closeJavier.addEventListener('click', () => {
+      javierModal.style.display = "none";
+    });
+
+    javierModal.addEventListener('click', (e) => {
+      if (e.target === javierModal) javierModal.style.display = "none";
+    });
   </script>
 
 </body>
