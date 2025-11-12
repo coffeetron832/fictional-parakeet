@@ -7,7 +7,7 @@
   document.body.appendChild(pixelTrail);
 
   // Detectar tamaño de pantalla
-  const pixelSize = window.innerWidth < 768 ? 16 : 24;
+  const pixelSize = window.innerWidth < 768 ? 8 : 12;
   const fadeDuration = 500; // ms
 
   document.addEventListener('mousemove', (e) => {
