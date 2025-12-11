@@ -211,31 +211,28 @@
       margin-top: 10px;
     }
 
-    .frases-header {
+    .frase-header {
   width: 100%;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.06); /* sutil */
+  background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(6px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 6px 0;
+  position: relative;
 }
 
-.frases-slider {
-  display: inline-flex;
-  gap: 60px; /* espacio entre frases */
+.frase-texto {
   white-space: nowrap;
-  animation: mover-frases 35s linear infinite;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
   letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.75);
+  position: absolute;
+  will-change: transform;
+  animation: slide-left 12s linear infinite;
 }
 
-.frases-slider span {
-  flex-shrink: 0;
-}
-
-/* Animación */
-@keyframes mover-frases {
+/* Animación del desplazamiento */
+@keyframes slide-left {
   from {
     transform: translateX(100%);
   }
@@ -244,19 +241,15 @@
   }
 }
 
+
   </style>
 </head>
 
 <body>
-<header class="frases-header">
-  <div class="frases-slider">
-    <span>"La suerte favorece a la mente preparada." — Louis Pasteur</span>
-    <span>"El futuro pertenece a quienes creen en la belleza de sus sueños." — Eleanor Roosevelt</span>
-    <span>"La disciplina es el puente entre las metas y los logros." — Jim Rohn</span>
-    <span>"No cuentes los días, haz que los días cuenten." — Muhammad Ali</span>
-    <span>"La mejor manera de predecir el futuro es crearlo." — Peter Drucker</span>
-  </div>
+<header class="frase-header">
+  <div id="frase-actual" class="frase-texto"></div>
 </header>
+
 
   <!-- HEADER -->
   <header>
@@ -340,6 +333,28 @@
       if (e.target === javierModal) javierModal.style.display = "none";
     });
   </script>
+
+  <script>
+  const frases = [
+    "“La suerte favorece a la mente preparada.” — Louis Pasteur",
+    "“El futuro pertenece a quienes creen en la belleza de sus sueños.” — Eleanor Roosevelt",
+    "“La disciplina es el puente entre las metas y los logros.” — Jim Rohn",
+    "“La mejor manera de predecir el futuro es crearlo.” — Peter Drucker",
+    "“No cuentes los días, haz que los días cuenten.” — Muhammad Ali"
+  ];
+
+  let index = 0;
+  const fraseDiv = document.getElementById("frase-actual");
+
+  function mostrarFrase() {
+    fraseDiv.textContent = frases[index];
+    index = (index + 1) % frases.length;
+  }
+
+  mostrarFrase();
+  setInterval(mostrarFrase, 8000); // cada 12s cambia frase (igual al tiempo de animación)
+</script>
+
 
   <!-- Pixel trail externo -->
   <script src="pxt.js"></script>
