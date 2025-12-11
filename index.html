@@ -6,21 +6,21 @@
   <title>pontón - Tienda Oficial</title>
 
   <!-- Favicon clásico -->
-<link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/favicon.ico" sizes="any">
 
-<!-- PNG favicons -->
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <!-- PNG favicons -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
-<!-- Apple Touch Icon (iOS) -->
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  <!-- Apple Touch Icon (iOS) -->
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
-<!-- Android / Chrome -->
-<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+  <!-- Android / Chrome -->
+  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
 
-<!-- Color de la barra superior en móviles -->
-<meta name="theme-color" content="#000000">
+  <!-- Color de la barra superior en móviles -->
+  <meta name="theme-color" content="#000000">
 
   <!-- FUENTES -->
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
@@ -50,7 +50,7 @@
     }
 
     h1 {
-      font-family: 'Archivo', sans-serif; 
+      font-family: 'Archivo', sans-serif;
       font-weight: 800;
       font-size: 4rem;
       letter-spacing: 1px;
@@ -107,7 +107,7 @@
     }
 
     .character h2 {
-      font-family: 'Archivo', sans-serif; 
+      font-family: 'Archivo', sans-serif;
       font-size: 1.5rem;
       margin-bottom: 10px;
     }
@@ -149,7 +149,7 @@
     }
 
     .modal h3 {
-      font-family: 'Archivo', sans-serif; 
+      font-family: 'Archivo', sans-serif;
       font-size: 1.8rem;
       margin-bottom: 10px;
     }
@@ -176,10 +176,87 @@
     .close-btn:hover {
       background: #ddd;
     }
+
+    /* FOOTER */
+    footer {
+      margin-top: 80px;
+      padding: 40px 20px;
+      background: #0a0a0a;
+      border-top: 1px solid #222;
+      text-align: center;
+    }
+
+    footer .links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 15px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: #888;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+
+    footer a:hover {
+      color: #fff;
+    }
+
+    footer p {
+      color: #666;
+      font-size: 0.85rem;
+      margin-top: 10px;
+    }
+
+    .frases-header {
+  width: 100%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06); /* sutil */
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 0;
+}
+
+.frases-slider {
+  display: inline-flex;
+  gap: 60px; /* espacio entre frases */
+  white-space: nowrap;
+  animation: mover-frases 35s linear infinite;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.5px;
+}
+
+.frases-slider span {
+  flex-shrink: 0;
+}
+
+/* Animación */
+@keyframes mover-frases {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
   </style>
 </head>
 
 <body>
+<header class="frases-header">
+  <div class="frases-slider">
+    <span>"La suerte favorece a la mente preparada." — Louis Pasteur</span>
+    <span>"El futuro pertenece a quienes creen en la belleza de sus sueños." — Eleanor Roosevelt</span>
+    <span>"La disciplina es el puente entre las metas y los logros." — Jim Rohn</span>
+    <span>"No cuentes los días, haz que los días cuenten." — Muhammad Ali</span>
+    <span>"La mejor manera de predecir el futuro es crearlo." — Peter Drucker</span>
+  </div>
+</header>
 
   <!-- HEADER -->
   <header>
@@ -222,6 +299,18 @@
       <button class="close-btn" id="close-javier">Cerrar</button>
     </div>
   </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="links">
+      <a href="#">Sobre nosotros</a>
+      <a href="#">Contacto</a>
+      <a href="#">Política de privacidad</a>
+      <a href="#">Términos y condiciones</a>
+    </div>
+
+    <p>© 2025 pontón. Todos los derechos reservados.</p>
+  </footer>
 
   <!-- JS -->
   <script>
