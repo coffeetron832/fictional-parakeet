@@ -211,50 +211,10 @@
       margin-top: 10px;
     }
 
-    .frase-header {
-  width: 100%;
-  height: 28px; /* altura fija para que no desaparezca */
-  overflow: hidden;
-  display: flex;
-  align-items: center;      /* centrar vertical */
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(6px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0 0;
-  position: relative;
-}
-
-.frase-texto {
-  white-space: nowrap;
-  font-size: 12px;
-  letter-spacing: 0.5px;
-  color: rgba(255, 255, 255, 0.75);
-  position: absolute;
-  left: 100%; /* arranca fuera de pantalla */
-  animation: slide-left 12s linear infinite;
-}
-
-/* Animación corregida */
-@keyframes slide-left {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-200%); /* más seguro para textos largos */
-  }
-}
-
-
-
   </style>
 </head>
 
 <body>
-<header class="frase-header">
-  <div id="frase-actual" class="frase-texto"></div>
-</header>
-
-
   <!-- HEADER -->
   <header>
     <div class="logo-container">
@@ -288,7 +248,7 @@
   <!-- MODAL JAVIER -->
   <div class="modal-bg" id="modal-javier">
     <div class="modal">
-      <h3>Javier</h3>
+      <h3>Carlos</h3>
       <p><strong>Color favorito:</strong> Azul</p>
       <p><strong>Gustos:</strong> Los carros, jugar billar y el reguetón viejo.</p>
       <p><strong>Historia:</strong> Es el tipo que siempre tiene todo bajo control… o al menos eso parece. Siempre carga un cigarrillo, aunque no siempre lo prende. Lo usa para pensar.</p>
@@ -337,28 +297,6 @@
       if (e.target === javierModal) javierModal.style.display = "none";
     });
   </script>
-
-  <script>
-  const frases = [
-    "“La suerte favorece a la mente preparada.” — Louis Pasteur",
-    "“El futuro pertenece a quienes creen en la belleza de sus sueños.” — Eleanor Roosevelt",
-    "“La disciplina es el puente entre las metas y los logros.” — Jim Rohn",
-    "“La mejor manera de predecir el futuro es crearlo.” — Peter Drucker",
-    "“No cuentes los días, haz que los días cuenten.” — Muhammad Ali"
-  ];
-
-  let index = 0;
-  const fraseDiv = document.getElementById("frase-actual");
-
-  function mostrarFrase() {
-    fraseDiv.textContent = frases[index];
-    index = (index + 1) % frases.length;
-  }
-
-  mostrarFrase();
-  setInterval(mostrarFrase, 16000); // cada 12s cambia frase (igual al tiempo de animación)
-</script>
-
 
   <!-- Pixel trail externo -->
   <script src="pxt.js"></script>
