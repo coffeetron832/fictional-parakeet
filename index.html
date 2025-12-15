@@ -42,7 +42,7 @@
       display: inline-block;
     }
 
-   .water-title {
+  .water-title {
   position: relative;
   font-family: 'Archivo', sans-serif;
   font-weight: 800;
@@ -61,13 +61,15 @@
   background: linear-gradient(
     120deg,
     #021a3a,
-    #0a3cff,
-    #1ec9ff
+    #043b8d,
+    #0a63ff,
+    #2fd3ff
   );
-  background-size: 200% 200%;
+  background-size: 300% 300%;
+
   animation:
-    waveShape 4s ease-in-out infinite,
-    waveColor 6s linear infinite;
+    waveShape 2.8s ease-in-out infinite,
+    waveColor 5s linear infinite;
 
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -75,21 +77,24 @@
   color: transparent;
 }
 
-/* 🌊 FORMA DE LA OLA (se mueve) */
+/* 🌊 OLEAJE MÁS VIVO + AGUA MÁS ALTA */
 @keyframes waveShape {
   0% {
     clip-path: polygon(
-      0% 72%,
-      10% 70%,
-      20% 73%,
-      30% 71%,
-      40% 74%,
-      50% 72%,
-      60% 75%,
-      70% 73%,
-      80% 76%,
-      90% 74%,
-      100% 77%,
+      0% 62%,
+      8% 58%,
+      16% 63%,
+      24% 59%,
+      32% 64%,
+      40% 60%,
+      48% 65%,
+      56% 61%,
+      64% 66%,
+      72% 62%,
+      80% 67%,
+      88% 63%,
+      96% 68%,
+      100% 64%,
       100% 100%,
       0% 100%
     );
@@ -97,17 +102,20 @@
 
   50% {
     clip-path: polygon(
-      0% 68%,
-      10% 71%,
-      20% 69%,
-      30% 72%,
-      40% 70%,
-      50% 73%,
-      60% 71%,
-      70% 74%,
-      80% 72%,
-      90% 75%,
-      100% 73%,
+      0% 58%,
+      8% 63%,
+      16% 59%,
+      24% 64%,
+      32% 60%,
+      40% 65%,
+      48% 61%,
+      56% 66%,
+      64% 62%,
+      72% 67%,
+      80% 63%,
+      88% 68%,
+      96% 64%,
+      100% 66%,
       100% 100%,
       0% 100%
     );
@@ -115,17 +123,20 @@
 
   100% {
     clip-path: polygon(
-      0% 72%,
-      10% 70%,
-      20% 73%,
-      30% 71%,
-      40% 74%,
-      50% 72%,
-      60% 75%,
-      70% 73%,
-      80% 76%,
-      90% 74%,
-      100% 77%,
+      0% 62%,
+      8% 58%,
+      16% 63%,
+      24% 59%,
+      32% 64%,
+      40% 60%,
+      48% 65%,
+      56% 61%,
+      64% 66%,
+      72% 62%,
+      80% 67%,
+      88% 63%,
+      96% 68%,
+      100% 64%,
       100% 100%,
       0% 100%
     );
@@ -135,9 +146,10 @@
 /* Movimiento interno del agua */
 @keyframes waveColor {
   0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  50% { background-position: 100% 60%; }
   100% { background-position: 0% 50%; }
 }
+
 
 
     .pose {
