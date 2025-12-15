@@ -43,13 +43,34 @@
     }
 
     h1 {
-      font-family: 'Archivo', sans-serif;
-      font-weight: 800;
-      font-size: 4rem;
-      letter-spacing: 1px;
-      position: relative;
-      z-index: 1;
-    }
+  font-family: 'Archivo', sans-serif;
+  font-weight: 800;
+  font-size: 4rem;
+  letter-spacing: 1px;
+  position: relative;
+  z-index: 1;
+
+  background: linear-gradient(
+    120deg,
+    #0a3cff,
+    #1ec9ff,
+    #0a3cff
+  );
+  background-size: 200% 200%;
+  animation: waterMove 6s ease-in-out infinite;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+    @keyframes waterMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 
     .pose {
       position: absolute;
