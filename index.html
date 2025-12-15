@@ -3,23 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>pontón - Tienda Oficial</title>
+  <title>FISHEANS - Tienda Oficial</title>
 
-  <!-- Favicon clásico -->
+  <!-- FAVICONS -->
   <link rel="icon" href="/favicon.ico" sizes="any">
-
-  <!-- PNG favicons -->
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-
-  <!-- Apple Touch Icon (iOS) -->
   <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-  <!-- Android / Chrome -->
   <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-
-  <!-- Color de la barra superior en móviles -->
   <meta name="theme-color" content="#000000">
 
   <!-- FUENTES -->
@@ -54,16 +46,15 @@
       font-weight: 800;
       font-size: 4rem;
       letter-spacing: 1px;
-      color: #fff;
       position: relative;
       z-index: 1;
     }
 
     .pose {
       position: absolute;
-      bottom: -1px;
-      right: -57px;
-      width: 100px;
+      bottom: -2px;
+      right: -48px;
+      width: 90px;
       transform: rotate(-6deg);
       z-index: 2;
     }
@@ -78,11 +69,12 @@
       padding: 0 20px;
     }
 
+    /* SECCIÓN SÍMBOLOS / PRODUCTOS */
     .characters {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 40px;
-      max-width: 1100px;
+      max-width: 900px;
       margin: 0 auto;
       padding: 60px 20px;
     }
@@ -101,20 +93,20 @@
     }
 
     .character img {
-      width: 190px;
+      width: 200px;
       height: auto;
       margin-bottom: -5px;
     }
 
     .character h2 {
       font-family: 'Archivo', sans-serif;
-      font-size: 1.5rem;
-      margin-bottom: 10px;
+      font-size: 1.3rem;
+      margin-bottom: 8px;
     }
 
     .character p {
       font-size: 0.95rem;
-      max-width: 280px;
+      max-width: 260px;
       margin: 0 auto;
       line-height: 1.5;
       color: #ccc;
@@ -139,7 +131,6 @@
       max-width: 400px;
       padding: 25px;
       border-radius: 10px;
-      text-align: left;
       animation: fadeIn 0.25s ease;
     }
 
@@ -164,7 +155,6 @@
       margin-top: 20px;
       width: 100%;
       padding: 10px;
-      text-align: center;
       border: none;
       background: #fff;
       color: #000;
@@ -190,15 +180,14 @@
       display: flex;
       justify-content: center;
       gap: 30px;
-      margin-bottom: 15px;
       flex-wrap: wrap;
+      margin-bottom: 15px;
     }
 
     footer a {
       color: #888;
       text-decoration: none;
       font-size: 0.9rem;
-      transition: 0.2s;
     }
 
     footer a:hover {
@@ -208,70 +197,53 @@
     footer p {
       color: #666;
       font-size: 0.85rem;
-      margin-top: 10px;
     }
-
   </style>
 </head>
 
 <body>
+
   <!-- HEADER -->
   <header>
     <div class="logo-container">
-      <h1>pontón</h1>
-      <img src="0988.png" alt="Personaje" class="pose">
+      <h1>FISHEANS</h1>
+      <img src="0988.png" alt="Símbolo pez" class="pose">
     </div>
     <p class="intro">
-      Dos figuras. Dos caminos. Un mismo movimiento original.
+      Denim funcional. Un símbolo que se mueve distinto.
     </p>
   </header>
 
-  <!-- PERSONAJES -->
+  <!-- PRODUCTOS / SÍMBOLOS -->
   <section class="characters">
 
-    <!-- JAVIER -->
-    <div class="character" id="javier-card">
-      <img src="personaje1.png" alt="Javier">
-      <h2>Carlos</h2>
-      <p>Relajado, impredecible, rápido para meterse y salir de problemas.</p>
+    <div class="character" id="fish-1">
+      <img src="fish1.png" alt="Fish Symbol 1">
+      <h2>Modelo 01</h2>
+      <p>Denim recto. Resistencia diaria.</p>
     </div>
 
-    <!-- PERSONAJE 2 -->
-    <div class="character" id="p2-card">
-      <img src="personaje2.png" alt="Personaje 2">
-      <h2>Personaje 2</h2>
-      <p>Texto breve sobre su esencia o personalidad.</p>
+    <div class="character" id="fish-2">
+      <img src="fish2.png" alt="Fish Symbol 2">
+      <h2>Modelo 02</h2>
+      <p>Corte relajado. Movimiento natural.</p>
     </div>
 
   </section>
 
-  <!-- MODAL JAVIER -->
-  <div class="modal-bg" id="modal-javier">
-    <div class="modal">
-      <h3>Carlos</h3>
-      <p><strong>Color favorito:</strong> Azul</p>
-      <p><strong>Gustos:</strong> Los carros, jugar billar y el reguetón viejo.</p>
-      <p><strong>Historia:</strong> Es el tipo que siempre tiene todo bajo control… o al menos eso parece. Siempre carga un cigarrillo, aunque no siempre lo prende. Lo usa para pensar.</p>
-
-      <button class="close-btn" id="close-javier">Cerrar</button>
-    </div>
-  </div>
-
   <!-- FOOTER -->
   <footer>
     <div class="links">
-      <a href="#">Sobre nosotros</a>
+      <a href="#">Sobre FISHEANS</a>
       <a href="#">Contacto</a>
-      <a href="#">Política de privacidad</a>
-      <a href="#">Términos y condiciones</a>
+      <a href="#">Privacidad</a>
+      <a href="#">Términos</a>
     </div>
-
-    <p>© 2025 pontón. Todos los derechos reservados.</p>
+    <p>© 2025 FISHEANS. Todos los derechos reservados.</p>
   </footer>
 
   <!-- JS -->
   <script>
-    /* Aparición por scroll */
     const chars = document.querySelectorAll('.character');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -279,26 +251,9 @@
       });
     }, { threshold: 0.2 });
     chars.forEach(char => observer.observe(char));
-
-    /* MODAL JAVIER */
-    const javierCard = document.getElementById('javier-card');
-    const javierModal = document.getElementById('modal-javier');
-    const closeJavier = document.getElementById('close-javier');
-
-    javierCard.addEventListener('click', () => {
-      javierModal.style.display = "flex";
-    });
-
-    closeJavier.addEventListener('click', () => {
-      javierModal.style.display = "none";
-    });
-
-    javierModal.addEventListener('click', (e) => {
-      if (e.target === javierModal) javierModal.style.display = "none";
-    });
   </script>
 
-  <!-- Pixel trail externo -->
+  <!-- Pixel trail -->
   <script src="pxt.js"></script>
 
 </body>
