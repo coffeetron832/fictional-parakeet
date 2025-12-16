@@ -1,361 +1,155 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FISHEANS - Tienda Oficial</title>
-
-  <!-- FAVICONS -->
-  
-  <link rel="icon" href="/favicon.ico" sizes="any">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
-  <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
-  <meta name="theme-color" content="#000000">
-
-  <!-- FUENTES -->
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Half Trure | Urban Wear</title>
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
     }
 
     body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Open Sans', sans-serif;
-      overflow-x: hidden;
+      background: #0f0f0f;
+      color: #f5f5f5;
     }
 
     header {
+      padding: 30px;
       text-align: center;
-      padding: 80px 20px 60px;
+      border-bottom: 1px solid #222;
     }
 
-    .logo-container {
-      position: relative;
-      display: inline-block;
+    header h1 {
+      font-size: 3rem;
+      letter-spacing: 2px;
     }
 
-  .water-title {
-  position: relative;
-  font-family: 'Archivo', sans-serif;
-  font-weight: 800;
-  font-size: 4rem;
-  letter-spacing: 1px;
-  color: #fff;
-  line-height: 1;
-}
-
-/* Capa de agua */
-.water-title::after {
-  content: "FISHEANS";
-  position: absolute;
-  inset: 0;
-
-  background: linear-gradient(
-    120deg,
-    #021a3a,
-    #043b8d,
-    #0a63ff,
-    #2fd3ff
-  );
-  background-size: 300% 300%;
-
-  animation:
-    waveShape 2.8s ease-in-out infinite,
-    waveColor 5s linear infinite;
-
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-}
-
-/* 🌊 OLEAJE MÁS VIVO + AGUA MÁS ALTA */
-@keyframes waveShape {
-  0% {
-    clip-path: polygon(
-      0% 62%,
-      8% 58%,
-      16% 63%,
-      24% 59%,
-      32% 64%,
-      40% 60%,
-      48% 65%,
-      56% 61%,
-      64% 66%,
-      72% 62%,
-      80% 67%,
-      88% 63%,
-      96% 68%,
-      100% 64%,
-      100% 100%,
-      0% 100%
-    );
-  }
-
-  50% {
-    clip-path: polygon(
-      0% 58%,
-      8% 63%,
-      16% 59%,
-      24% 64%,
-      32% 60%,
-      40% 65%,
-      48% 61%,
-      56% 66%,
-      64% 62%,
-      72% 67%,
-      80% 63%,
-      88% 68%,
-      96% 64%,
-      100% 66%,
-      100% 100%,
-      0% 100%
-    );
-  }
-
-  100% {
-    clip-path: polygon(
-      0% 62%,
-      8% 58%,
-      16% 63%,
-      24% 59%,
-      32% 64%,
-      40% 60%,
-      48% 65%,
-      56% 61%,
-      64% 66%,
-      72% 62%,
-      80% 67%,
-      88% 63%,
-      96% 68%,
-      100% 64%,
-      100% 100%,
-      0% 100%
-    );
-  }
-}
-
-/* Movimiento interno del agua */
-@keyframes waveColor {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 60%; }
-  100% { background-position: 0% 50%; }
-}
-
-
-
-    .pose {
-      position: absolute;
-      bottom: -2px;
-      right: -48px;
-      width: 90px;
-      transform: rotate(-6deg);
-      z-index: 2;
+    header p {
+      color: #aaa;
+      margin-top: 10px;
     }
 
-    .intro {
-      max-width: 700px;
-      margin: 40px auto 0;
-      text-align: center;
-      font-size: 1rem;
-      line-height: 1.6;
-      color: #ccc;
-      padding: 0 20px;
-    }
-
-    /* SECCIÓN SÍMBOLOS / PRODUCTOS */
-    .characters {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 60px 20px;
-    }
-
-    .character {
-      text-align: center;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-      cursor: pointer;
-    }
-
-    .character.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .character img {
-      width: 200px;
-      height: auto;
-      margin-bottom: -5px;
-    }
-
-    .character h2 {
-      font-family: 'Archivo', sans-serif;
-      font-size: 1.3rem;
-      margin-bottom: 8px;
-    }
-
-    .character p {
-      font-size: 0.95rem;
-      max-width: 260px;
-      margin: 0 auto;
-      line-height: 1.5;
-      color: #ccc;
-    }
-
-    /* MODAL */
-    .modal-bg {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(4px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-    }
-
-    .modal {
-      background: #111;
-      border: 1px solid #333;
-      width: 90%;
-      max-width: 400px;
-      padding: 25px;
-      border-radius: 10px;
-      animation: fadeIn 0.25s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .modal h3 {
-      font-family: 'Archivo', sans-serif;
-      font-size: 1.8rem;
-      margin-bottom: 10px;
-    }
-
-    .modal p {
-      color: #ccc;
-      margin-bottom: 10px;
-      line-height: 1.5;
-    }
-
-    .close-btn {
-      margin-top: 20px;
-      width: 100%;
-      padding: 10px;
-      border: none;
-      background: #fff;
-      color: #000;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .close-btn:hover {
-      background: #ddd;
-    }
-
-    /* FOOTER */
-    footer {
-      margin-top: 80px;
-      padding: 40px 20px;
-      background: #0a0a0a;
-      border-top: 1px solid #222;
-      text-align: center;
-    }
-
-    footer .links {
+    nav {
       display: flex;
       justify-content: center;
       gap: 30px;
-      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    nav a {
+      color: #f5f5f5;
+      text-decoration: none;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    nav a:hover {
+      color: #7aff00;
+    }
+
+    .hero {
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(180deg, #000, #111);
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      max-width: 600px;
+    }
+
+    .products {
+      padding: 60px 10%;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .product {
+      background: #151515;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .product:hover {
+      transform: translateY(-5px);
+    }
+
+    .product img {
+      width: 100%;
+      border-radius: 10px;
       margin-bottom: 15px;
     }
 
-    footer a {
-      color: #888;
-      text-decoration: none;
-      font-size: 0.9rem;
+    .product h3 {
+      margin-bottom: 8px;
     }
 
-    footer a:hover {
-      color: #fff;
+    .product span {
+      color: #7aff00;
+      font-weight: bold;
     }
 
-    footer p {
-      color: #666;
-      font-size: 0.85rem;
+    footer {
+      padding: 40px;
+      text-align: center;
+      border-top: 1px solid #222;
+      color: #777;
+      font-size: 0.8rem;
     }
   </style>
 </head>
-
 <body>
 
-  <!-- HEADER -->
   <header>
-    <div class="logo-container">
-      <h1 class="water-title">FISHEANS</h1>
-      <img src="0988.png" alt="Símbolo pez" class="pose">
-    </div>
-    <p class="intro">
-      Denim funcional. Un símbolo que se mueve distinto.
-    </p>
+    <h1>HALF TRURE</h1>
+    <p>Urban clothing for real streets</p>
   </header>
 
-  <!-- PRODUCTOS / SÍMBOLOS -->
-  <section class="characters">
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#">Tienda</a>
+    <a href="#">Colección</a>
+    <a href="#">Contacto</a>
+  </nav>
 
-    <div class="character" id="fish-1">
-      <img src="fish1.png" alt="Fish Symbol 1">
-      <h2>Modelo 01</h2>
-      <p>Denim recto. Resistencia diaria.</p>
-    </div>
-
-    <div class="character" id="fish-2">
-      <img src="fish2.png" alt="Fish Symbol 2">
-      <h2>Modelo 02</h2>
-      <p>Corte relajado. Movimiento natural.</p>
-    </div>
-
+  <section class="hero">
+    <h2>No es moda. Es identidad.</h2>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="links">
-      <a href="#">Sobre FISHEANS</a>
-      <a href="#">Contacto</a>
-      <a href="#">Términos</a>
+  <section class="products">
+    <div class="product">
+      <img src="https://via.placeholder.com/400x500" alt="Camiseta Half Trure" />
+      <h3>Camiseta Oversize</h3>
+      <span>$90.000 COP</span>
     </div>
-    <p>© 2025 FISHEANS. Todos los derechos reservados.</p>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/400x500" alt="Hoodie Half Trure" />
+      <h3>Hoodie Street</h3>
+      <span>$180.000 COP</span>
+    </div>
+
+    <div class="product">
+      <img src="https://via.placeholder.com/400x500" alt="Gorra Half Trure" />
+      <h3>Gorra Minimal</h3>
+      <span>$60.000 COP</span>
+    </div>
+  </section>
+
+  <footer>
+    © 2025 Half Trure — Diseñado desde la calle.
   </footer>
-
-  <!-- JS -->
-  <script>
-    const chars = document.querySelectorAll('.character');
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
-    }, { threshold: 0.2 });
-    chars.forEach(char => observer.observe(char));
-  </script>
-
-  <!-- Pixel trail -->
-  <script src="pxt.js"></script>
 
 </body>
 </html>
