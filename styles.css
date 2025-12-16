@@ -101,3 +101,9 @@ footer {
   color: #777;
   font-size: 0.8rem;
 }
+
+header h1 {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 3rem;
+  letter-spacing: 2px;
+}
