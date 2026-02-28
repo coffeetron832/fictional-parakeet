@@ -1,60 +1,86 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Half True | Urban Wear</title>
-
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap" rel="stylesheet">
-
-  <!-- CSS externo -->
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PrivaOffice | Ecosistema Privado</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-
 <body>
 
-  <header>
-    <h1>Half 212112121221True</h1>
-    <p>Urban clothing for real streets</p>
-  </header>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-shield-halved"></i>
+                <span>PrivaOffice</span>
+            </div>
+            
+            <nav class="menu">
+                <p class="menu-label">Herramientas</p>
+                <ul>
+                    <li><button class="nav-btn active" data-app="notas"><i class="fas fa-edit"></i> Notas</button></li>
+                    <li><button class="nav-btn" data-app="tareas"><i class="fas fa-check-double"></i> Tareas</button></li>
+                    <li><button class="nav-btn" data-app="finanzas"><i class="fas fa-wallet"></i> Finanzas</button></li>
+                </ul>
 
-  <nav>
-    <a href="#">Inicio</a>
-    <a href="#">Tienda</a>
-    <a href="#">Colección</a>
-    <a href="#">Contacto</a>
-  </nav>
+                <p class="menu-label">Sistema</p>
+                <ul>
+                    <li><button class="nav-btn" data-app="ajustes"><i class="fas fa-cog"></i> Ajustes</button></li>
+                    <li><button class="nav-btn btn-export" id="btn-exportar"><i class="fas fa-download"></i> Exportar Datos</button></li>
+                </ul>
+            </nav>
 
-  <section class="hero">
-    <h2>No es moda. Es identidad.</h2>
-  </section>
+            <div class="sidebar-footer">
+                <small>100% Local-First</small>
+            </div>
+        </aside>
 
-  <section class="products">
-    <div class="product">
-      <img src="https://via.placeholder.com/400x500" alt="Camiseta Half True" />
-      <h3>Camiseta Oversize</h3>
-      <span>$90.000 COP</span>
+        <main class="content" id="app-container">
+            
+            <section id="view-notas" class="app-view active">
+                <header class="app-header">
+                    <h1>Editor de Notas</h1>
+                    <p>Tus pensamientos se quedan en tu navegador.</p>
+                </header>
+                <div class="app-body">
+                    <textarea id="nota-texto" placeholder="Empieza a escribir..."></textarea>
+                </div>
+            </section>
+
+            <section id="view-tareas" class="app-view">
+                <header class="app-header">
+                    <h1>Gestor de Tareas</h1>
+                </header>
+                <div class="app-body">
+                    <div class="task-input-group">
+                        <input type="text" id="input-tarea" placeholder="¿Qué hay que hacer?">
+                        <button id="add-tarea">Añadir</button>
+                    </div>
+                    <ul id="lista-tareas" class="task-list"></ul>
+                </div>
+            </section>
+
+            <section id="view-ajustes" class="app-view">
+                <header class="app-header">
+                    <h1>Configuración y Privacidad</h1>
+                </header>
+                <div class="app-body">
+                    <div class="card">
+                        <h3>Gestión de Datos</h3>
+                        <p>Como no usamos cuentas, tú eres el dueño de tus datos. Puedes descargarlos o borrarlos permanentemente aquí.</p>
+                        <div class="actions">
+                            <button class="btn-danger" id="btn-borrar-todo">Borrar Todo</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
     </div>
 
-    <div class="product">
-      <img src="https://via.placeholder.com/400x500" alt="Hoodie Half True" />
-      <h3>Hoodie Street</h3>
-      <span>$180.000 COP</span>
-    </div>
-
-    <div class="product">
-      <img src="https://via.placeholder.com/400x500" alt="Gorra Half True" />
-      <h3>Gorra Minimal</h3>
-      <span>$60.000 COP</span>
-    </div>
-  </section>
-
-  <footer>
-    © 2025 Half True — Diseñado desde la calle.
-  </footer>
-
+    <script src="main.js"></script>
+    <script src="apps/notas.js"></script>
+    <script src="apps/tareas.js"></script>
 </body>
 </html>
